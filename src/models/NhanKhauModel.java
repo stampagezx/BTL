@@ -7,6 +7,15 @@ public class NhanKhauModel {
 	int tuoi;
 	String sdt;
 	String trangthai;
+	String gioitinh;
+	public String getGioitinh() {
+		return gioitinh;
+	}
+
+	public void setGioitinh(String gioitinh) {
+		this.gioitinh = gioitinh;
+	}
+
 	public int getMaho() {
 		return maho;
 	}
@@ -28,7 +37,7 @@ public class NhanKhauModel {
 		this.maho = maho;
 	}
 	
-	public NhanKhauModel(int id,String cmnd, String ten, int tuoi , String sdt, String trangthai, int maho) {
+	public NhanKhauModel(int id,String cmnd, String ten, int tuoi , String sdt, String trangthai, int maho, String gioitinh) {
 		this.id=id;
 		this.cmnd = cmnd;
 		this.ten=ten;
@@ -36,6 +45,7 @@ public class NhanKhauModel {
 		this.sdt = sdt;
 		this.trangthai = trangthai;
 		this.maho = maho;
+		this.gioitinh = gioitinh;
 	}
 
 	public int getId() {

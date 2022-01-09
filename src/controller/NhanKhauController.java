@@ -55,6 +55,8 @@ public class NhanKhauController implements Initializable {
 	@FXML
 	private TableColumn<NhanKhauModel, String> colMaHo;
 	@FXML
+	private TableColumn<NhanKhauModel, String> colGioitinh;
+	@FXML
 	private TableView<NhanKhauModel> tvNhanKhau;
 	@FXML
 	private TextField tfSearch;
@@ -92,18 +94,20 @@ public class NhanKhauController implements Initializable {
 		colCMND.setCellValueFactory(new PropertyValueFactory<NhanKhauModel, String>("cmnd"));
 		colSDT.setCellValueFactory(new PropertyValueFactory<NhanKhauModel, String>("sdt"));
 		colTrangthai.setCellValueFactory(new PropertyValueFactory<NhanKhauModel, String>("trangthai"));
-		try {
-			colMaHo.setCellValueFactory(
-					(CellDataFeatures<NhanKhauModel, String> p) -> new ReadOnlyStringWrapper(mapIdToMaho.get(p.getValue().getId()).toString())
-			);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		colGioitinh.setCellValueFactory(new PropertyValueFactory<NhanKhauModel, String>("gioitinh"));
+		colMaHo.setCellValueFactory(new PropertyValueFactory<NhanKhauModel, String>("maho"));
+//		try {
+//			colMaHo.setCellValueFactory(
+//					(CellDataFeatures<NhanKhauModel, String> p) -> new ReadOnlyStringWrapper(mapIdToMaho.get(p.getValue().getId()).toString())
+//			);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		
 		tvNhanKhau.setItems(listValueTableView);
 
 		// thiet lap gia tri cho combobox
-		ObservableList<String> listComboBox = FXCollections.observableArrayList("Tên", "Tuổi", "id", "Vắng mặt", "Có mặt", "Mã hộ");
+		ObservableList<String> listComboBox = FXCollections.observableArrayList("Tên", "Tuổi", "id", "Tạm trú", "Có mặt", "Mã hộ", "Tạm vắng");
 		cbChooseSearch.setValue("Tên");
 		cbChooseSearch.setItems(listComboBox);
 	}
@@ -274,6 +278,54 @@ public class NhanKhauController implements Initializable {
 			break;
 		}
 		
+		case "Tạm trú": {
+			String key = "Tạm trú";
+			
+			int index = 0;
+			List<NhanKhauModel> listNhanKhau_tmp3 = new ArrayList<>();
+			for (NhanKhauModel nhanKhauModel : listNhanKhau) {
+				if (nhanKhauModel.getTrangthai().contains(key)) {
+					listNhanKhau_tmp3.add(nhanKhauModel);
+					index++;
+				}
+			}
+			listValueTableView_tmp = FXCollections.observableArrayList(listNhanKhau_tmp3);
+			tvNhanKhau.setItems(listValueTableView_tmp);
+			
+			// neu khong tim thay thong tin tim kiem -> thong bao toi nguoi dung
+			if (index == 0) {
+				tvNhanKhau.setItems(listValueTableView); // hien thi toan bo thong tin
+				Alert alert = new Alert(AlertType.INFORMATION, "Không tìm thấy thông tin!", ButtonType.OK);
+				alert.setHeaderText(null);
+				alert.showAndWait();
+			}
+			break;
+		}
+		
+		case "Tạm vắng": {
+			String key = "Tạm vắng";
+			
+			int index = 0;
+			List<NhanKhauModel> listNhanKhau_tmp3 = new ArrayList<>();
+			for (NhanKhauModel nhanKhauModel : listNhanKhau) {
+				if (nhanKhauModel.getTrangthai().contains(key)) {
+					listNhanKhau_tmp3.add(nhanKhauModel);
+					index++;
+				}
+			}
+			listValueTableView_tmp = FXCollections.observableArrayList(listNhanKhau_tmp3);
+			tvNhanKhau.setItems(listValueTableView_tmp);
+			
+			// neu khong tim thay thong tin tim kiem -> thong bao toi nguoi dung
+			if (index == 0) {
+				tvNhanKhau.setItems(listValueTableView); // hien thi toan bo thong tin
+				Alert alert = new Alert(AlertType.INFORMATION, "Không tìm thấy thông tin!", ButtonType.OK);
+				alert.setHeaderText(null);
+				alert.showAndWait();
+			}
+			break;
+		}
+		
 		default: { // truong hop con lai : tim theo id
 			// neu khong nhap gi -> thong bao loi
 			if (keySearch.length() == 0) {
@@ -313,7 +365,7 @@ public class NhanKhauController implements Initializable {
 	public void addNhanKhau(ActionEvent event) throws IOException, ClassNotFoundException, SQLException {
 		Parent home = FXMLLoader.load(getClass().getResource("/views/nhankhau/AddNhanKhau.fxml"));
         Stage stage = new Stage();
-        stage.setScene(new Scene(home,800,600));
+        stage.setScene(new Scene(home,800,700));
         stage.setResizable(false);
         stage.showAndWait();
         showNhanKhau();
@@ -371,7 +423,7 @@ public class NhanKhauController implements Initializable {
 		loader.setLocation(getClass().getResource("/views/nhankhau/UpdateNhanKhau.fxml"));
 		Parent home = loader.load(); 
         Stage stage = new Stage();
-        stage.setScene(new Scene(home,800,600));
+        stage.setScene(new Scene(home,700,700));
         UpdateNhanKhau updateNhanKhau = loader.getController();
         
         // bat loi truong hop khong hop le

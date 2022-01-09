@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" styleClass="pane" stylesheets="@../../source/change.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.hokhau.UpdateHoKhau">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" styleClass="pane" stylesheets="@../../source/change.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.hokhau.UpdateHoKhau">
    <children>
       <Pane layoutX="75.0" layoutY="96.0" prefHeight="386.0" prefWidth="450.0" styleClass="subpane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0">
          <children>
-            <TextField fx:id="tfSDT" editable="false" layoutX="156.0" layoutY="306.0" prefHeight="39.0" prefWidth="269.0" style="-fx-background-color: #eaeaea;" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="100.0" />
+            <TextField fx:id="tfSDT" layoutX="156.0" layoutY="306.0" prefHeight="39.0" prefWidth="269.0" AnchorPane.leftAnchor="225.0" AnchorPane.rightAnchor="100.0" />
             <TextField fx:id="tfMaHo" editable="false" layoutX="156.0" layoutY="22.0" prefHeight="39.0" prefWidth="269.0" style="-fx-background-color: #eaeaea;" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="25.0" />
             <Label layoutX="26.0" layoutY="28.0" text="Mã hộ" />
             <Label layoutX="25.0" layoutY="159.0" text="Số thành viên" />
@@ -22,8 +22,8 @@
             <TextField fx:id="tfTenChuHo" editable="false" layoutX="156.0" layoutY="89.0" prefHeight="39.0" prefWidth="269.0" style="-fx-background-color: #eaeaea;" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="25.0" />
          </children>
       </Pane>
-      <Button layoutX="241.0" layoutY="527.0" mnemonicParsing="false" onAction="#updateHoKhau" prefHeight="39.0" prefWidth="99.0" style="-fx-background-color: #cccccc;" text="Sửa" />
-      <Label layoutX="153.0" layoutY="40.0" text="Sửa thông tin hộ khẩu" textFill="#ebebeb">
+      <Button layoutX="301.0" layoutY="528.0" mnemonicParsing="false" onAction="#updateHoKhau" prefHeight="39.0" prefWidth="99.0" style="-fx-background-color: #cccccc;" text="Cập nhật" />
+      <Label layoutX="193.0" layoutY="32.0" text="Sửa thông tin hộ khẩu" textFill="#ebebeb">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>

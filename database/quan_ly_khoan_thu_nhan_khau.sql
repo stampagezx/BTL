@@ -30,6 +30,7 @@ CREATE TABLE `nhan_khau` (
   `SDT` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `TrangThai` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `MaHo` int DEFAULT NULL,
+  `gioitinh` enum('Nam','Nữ') ,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12332 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -1,14 +1,21 @@
 package controller.hokhau;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -21,7 +28,7 @@ import services.HoKhauService;
 import services.NhanKhauService;
 import services.QuanHeService;
 
-public class AddHoKhau {
+public class AddHoKhau implements Initializable {
 	@FXML
 	private TextField tfMaHoKhau;
 	@FXML
@@ -37,9 +44,13 @@ public class AddHoKhau {
 	@FXML
 	private TextField tfSoDienThoai;	
 	@FXML
+	private ComboBox<String> tfGioiTinh;
 	public void addHoKhau(ActionEvent event) throws ClassNotFoundException, SQLException {
 		// khai bao mot mau de so sanh
 		Pattern pattern;
+		// thiet lap gia tri cho combobox
+		SingleSelectionModel<String> gioitinhSelection = tfGioiTinh.getSelectionModel();
+		String gioitinh_tmp = gioitinhSelection.getSelectedItem();
 		
 		// kiem tra maHo nhap vao
 		// maHo la day so tu 1 toi 11 chu so
@@ -131,8 +142,9 @@ public class AddHoKhau {
 		String cmndChuHo = tfCMND.getText();
 		String sdtChuHo = tfSoDienThoai.getText();
 		String trangThai = "Có mặt";
+		String gioitinhString = gioitinh_tmp;
 		HoKhauModel hoKhauModel = new HoKhauModel(maHo, diaChi, 0,tenChuHo);
-		NhanKhauModel nhanKhauModel = new NhanKhauModel(maChuHo, cmndChuHo, tenChuHo, tuoiChuHo, sdtChuHo, trangThai, maHo);
+		NhanKhauModel nhanKhauModel = new NhanKhauModel(maChuHo, cmndChuHo, tenChuHo, tuoiChuHo, sdtChuHo, trangThai, maHo, gioitinhString);
 		
 		new HoKhauService().add(hoKhauModel);
 		new NhanKhauService().add(nhanKhauModel);
@@ -141,6 +153,13 @@ public class AddHoKhau {
 		
 		Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
+	}
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// thiet lap gia tri cho gioi tinh
+		ObservableList<String> listComboBox = FXCollections.observableArrayList("Nam", "Nữ");
+		tfGioiTinh.setValue("Nam");
+		tfGioiTinh.setItems(listComboBox);
 	}
 
 }

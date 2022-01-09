@@ -165,7 +165,7 @@ public class KhoanThuController implements Initializable {
 	public void addKhoanThu() throws IOException, ClassNotFoundException, SQLException {
 		Parent home = FXMLLoader.load(getClass().getResource("/views/khoanthu/AddKhoanThu.fxml"));
 		Stage stage = new Stage();
-		stage.setScene(new Scene(home, 800, 600));
+		stage.setScene(new Scene(home, 800, 500));
 		stage.setResizable(false);
 		stage.showAndWait();
 		showKhoanThu();

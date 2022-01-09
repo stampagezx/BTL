@@ -61,7 +61,7 @@ public class ThongKeController implements Initializable {
 
 		tvThongKe.setItems(listValueTableView);
 		// thiet lap gia tri cho combobox
-		ObservableList<String> listComboBox = FXCollections.observableArrayList("Bắt buộc", "Tự nguyện", "Tất cả");
+		ObservableList<String> listComboBox = FXCollections.observableArrayList("Bắt buộc", "Tự nguyện");
 		cbChooseSearch.setValue("Tất cả");
 		cbChooseSearch.setItems(listComboBox);
 	}

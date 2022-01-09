@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.khoanthu.AddKhoanThu">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.khoanthu.AddKhoanThu">
    <children>
       <Label layoutX="122.0" layoutY="144.0" text="Mã khoản thu" />
       <TextField fx:id="tfMaKhoanThu" layoutX="254.0" layoutY="138.0" prefHeight="39.0" prefWidth="353.0" />
@@ -16,7 +16,7 @@
       <ComboBox fx:id="cbLoaiKhoanThu" layoutX="254.0" layoutY="295.0" prefHeight="39.0" prefWidth="353.0" />
       <Label layoutX="118.0" layoutY="372.0" text="Số tiền" />
       <TextField fx:id="tfSoTien" layoutX="254.0" layoutY="366.0" prefHeight="39.0" prefWidth="353.0" />
-      <Button layoutX="360.0" layoutY="483.0" mnemonicParsing="false" onAction="#addKhoanThu" text="Xác nhận" />
+      <Button layoutX="360.0" layoutY="449.0" mnemonicParsing="false" onAction="#addKhoanThu" text="Xác nhận" />
       <Label layoutX="303.0" layoutY="58.0" text="THÊM KHOẢN THU">
          <font>
             <Font name="Arial Bold" size="25.0" />
