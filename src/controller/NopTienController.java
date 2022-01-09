@@ -177,7 +177,7 @@ public class NopTienController implements Initializable {
 	public void addNopTien(ActionEvent event) throws IOException, ClassNotFoundException, SQLException {
 		Parent home = FXMLLoader.load(getClass().getResource("/views/noptien/AddNopTien.fxml"));
 		Stage stage = new Stage();
-		stage.setScene(new Scene(home, 800, 600));
+		stage.setScene(new Scene(home, 800, 450));
 		stage.setResizable(false);
 		stage.showAndWait();
 		showNopTien();

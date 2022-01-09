@@ -96,7 +96,7 @@ public class HoKhauController implements Initializable {
 	public void addHoKhau() throws ClassNotFoundException, SQLException, IOException {
 		Parent home = FXMLLoader.load(getClass().getResource("/views/hokhau/AddHoKhau.fxml"));
 		Stage stage = new Stage();
-		stage.setScene(new Scene(home, 800, 600));
+		stage.setScene(new Scene(home, 800, 750));
 		stage.setResizable(false);
 		stage.showAndWait();
 		showHoKhau();

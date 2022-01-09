@@ -35,7 +35,7 @@ public class LoginController {
 		
 		Parent home = FXMLLoader.load(getClass().getResource("/views/Home3.fxml"));
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(home,800,600));
+        stage.setScene(new Scene(home,1200,700));
         stage.setResizable(false);
         stage.show();
 	}

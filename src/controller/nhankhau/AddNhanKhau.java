@@ -1,14 +1,21 @@
 package controller.nhankhau;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -20,7 +27,7 @@ import services.HoKhauService;
 import services.NhanKhauService;
 import services.QuanHeService;
 
-public class AddNhanKhau {
+public class AddNhanKhau implements Initializable {
 	@FXML
 	private TextField tfId;
 	@FXML
@@ -36,11 +43,22 @@ public class AddNhanKhau {
 	@FXML
 	private TextField tfQuanHe;
 	@FXML
-	private TextField tfTrangThai;
+	private ComboBox<String> tfTrangThai;
+	@FXML
+	private ComboBox<String> tfGioiTinh;
+	
 
 	public void addNhanKhau(ActionEvent event) throws ClassNotFoundException, SQLException {
 		// khai bao mot mau de so sanh
 		Pattern pattern;
+		// thiet lap gia tri cho combobox
+		SingleSelectionModel<String> gioitinhSelection = tfGioiTinh.getSelectionModel();
+		String gioitinh_tmp = gioitinhSelection.getSelectedItem();
+		
+		SingleSelectionModel<String> trangthaiSelection = tfTrangThai.getSelectionModel();
+		String trangthai_tmp = trangthaiSelection.getSelectedItem();
+		
+		
 
 		// kiem tra id nhap vao
 		// id la day so tu 1 toi 11 chu so
@@ -100,14 +118,6 @@ public class AddNhanKhau {
 			alert.showAndWait();
 			return;
 		}
-		// kiem tra trang thai nhap vao
-		// trang thai nhap vao la 1 chuoi t 1 toi 30 ki tu
-		if (tfTrangThai.getText().length() >= 50 || tfTrangThai.getText().length() <= 1) {
-			Alert alert = new Alert(AlertType.WARNING, "Hãy nhập vào 1 trạng thái hợp lệ!", ButtonType.OK);
-			alert.setHeaderText(null);
-			alert.showAndWait();
-			return;
-		}
 
 		// kiem tra maHo nhap vao
 		// ma ho nhap vao phai khong chua chu cai va nho hon 11 chu so
@@ -141,17 +151,18 @@ public class AddNhanKhau {
 		// ghi nhan gia tri ghi tat ca deu da hop le
 		int idInt = Integer.parseInt(tfId.getText());
 		String tenString = tfTen.getText();
+		String gioitinhString = gioitinh_tmp;
 		int tuoiInt = Integer.parseInt(tfTuoi.getText());
 		String cmndString = tfCmnd.getText();
 		String sdtString = tfSdt.getText();
 		int mahokhauInt = Integer.parseInt(tfMaHoKhau.getText());
 		String quanheString = tfQuanHe.getText();
-		String trangthaiString = tfTrangThai.getText();
+		String trangthaiString = trangthai_tmp;
 
 		NhanKhauService nhanKhauService = new NhanKhauService();
 		QuanHeService quanHeService = new QuanHeService();
 
-		NhanKhauModel nhanKhauModel = new NhanKhauModel(idInt, cmndString, tenString, tuoiInt, sdtString, trangthaiString, mahokhauInt);
+		NhanKhauModel nhanKhauModel = new NhanKhauModel(idInt, cmndString, tenString, tuoiInt, sdtString, trangthaiString, mahokhauInt,gioitinhString);
 		QuanHeModel quanHeModel = new QuanHeModel(mahokhauInt, idInt, quanheString);
 
 		nhanKhauService.add(nhanKhauModel);
@@ -159,5 +170,16 @@ public class AddNhanKhau {
 
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.close();
+	}
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// thiet lap gia tri cho gioi tinh
+		ObservableList<String> listComboBox = FXCollections.observableArrayList("Nam", "Nữ");
+		tfGioiTinh.setValue("Nam");
+		tfGioiTinh.setItems(listComboBox);
+		// thiet lap gia tri cho trang thai
+		ObservableList<String> listComboBox1 = FXCollections.observableArrayList("Tạm trú", "Tạm vắng", "Có mặt");
+		tfTrangThai.setValue("Tạm trú");
+		tfTrangThai.setItems(listComboBox1);
 	}
 }

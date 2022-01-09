@@ -16,7 +16,7 @@ public class NhanKhauService {
 	public boolean add(NhanKhauModel nhanKhauModel) throws ClassNotFoundException, SQLException {
 
 		Connection connection = MysqlConnection.getMysqlConnection();
-		String query = "INSERT INTO nhan_khau(ID, CMND, Ten, Tuoi, SDT, TrangThai, MaHo)" + " values (?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO nhan_khau(ID, CMND, Ten, Tuoi, SDT, TrangThai, MaHo, gioitinh)" + " values (?, ?, ?, ?, ?, ?, ?,?)";
 		PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		preparedStatement.setInt(1, nhanKhauModel.getId());
 		preparedStatement.setString(2, nhanKhauModel.getCmnd());
@@ -25,6 +25,7 @@ public class NhanKhauService {
 		preparedStatement.setString(5, nhanKhauModel.getSdt());
 		preparedStatement.setString(6, nhanKhauModel.getTrangthai());
 		preparedStatement.setInt(7, nhanKhauModel.getMaho());
+		preparedStatement.setString(8, nhanKhauModel.getGioitinh());
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
 		connection.close();
@@ -68,13 +69,13 @@ public class NhanKhauService {
 		return true;
 	}
 
-	public boolean update(int id, String cmnd, String ten, int tuoi, String sdt, String trangthai)
+	public boolean update(int id, int MaHo, String cmnd, String ten, int tuoi, String sdt, String trangthai, String gioitinh)
 			throws ClassNotFoundException, SQLException {
 		Connection connection = MysqlConnection.getMysqlConnection();
 		PreparedStatement preparedStatement;
 
-		String query = "UPDATE nhan_khau " + "set CMND =" + "'" + cmnd + "'," + "Ten =" + "'" + ten + "', TrangThai =" + "'" + trangthai + "',"  + "Tuoi ="
-				+ tuoi + "," + "SDT =" + "'" + sdt + "' where ID =" + id;
+		String query = "UPDATE nhan_khau " + "set CMND =" + "'" + cmnd + "'," + "Ten =" + "'" + ten + "', TrangThai =" + "'" + trangthai + "', Tuoi ="
+				+ tuoi + ", gioitinh =" + "'" + gioitinh + "'," + "SDT =" + "'" + sdt + "', MaHo = '"+ MaHo +"'" + "where ID = " + id;
 		preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
@@ -92,7 +93,7 @@ public class NhanKhauService {
 		ResultSet rs = preparedStatement.executeQuery();
 		while (rs.next()) {
 			NhanKhauModel nhanKhauModel = new NhanKhauModel(rs.getInt("ID"), rs.getString("CMND"), rs.getString("Ten"),
-					rs.getInt("Tuoi"), rs.getString("SDT"), rs.getString("TrangThai"), rs.getInt("MaHo"));
+					rs.getInt("Tuoi"), rs.getString("SDT"), rs.getString("TrangThai"), rs.getInt("MaHo"), rs.getString("gioitinh"));
 			list.add(nhanKhauModel);
 		}
 		preparedStatement.close();
